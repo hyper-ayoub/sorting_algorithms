@@ -19,8 +19,7 @@ void tac_the_items(int *array, size_t l, size_t r)
 }
 
 /**
- * quick_lomuto - Sorts a sub array using the
- * quick sort and Lomuto's 
+ * quick_lomuto - sort the sub array 
  * @array: The array of the sub_array.
  * @low: start position of the sub_array.
  * @high: end position of the sub_array.
@@ -59,7 +58,7 @@ void quick_lomuto(int *array, size_t low, size_t high, size_t size)
 }
 
 /**
- * quick_sort - Sorts array 
+ * quick_sort - sorts the  array
  * @array: array to sort.
  * @size: length of the array.
  */
