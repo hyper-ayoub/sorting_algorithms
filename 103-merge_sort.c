@@ -3,69 +3,69 @@
 #include <stdio.h>
 
 /**
-* TDMerge - sorts and merges the sub arrays
+* merge - sorts and merges
 * @start: starting index
-* @middle: end index
+* @md: end index
 * @end: end index
-* @dest: destination for the data
-* @source: source of the data
+* @desti: destination for data
+* @source: source of data
 *
 * Return: void
 */
-void TDMerge(size_t start, size_t middle, size_t end, int *dest, int *source)
+void merge(size_t start, size_t md, size_t end, int *desti, int *source)
 {
 	size_t i, j, k;
 
 	printf("Merging...\n");
 	printf("[left]: ");
-	print_array(source + start, middle - start);
+	print_array(source + start, md - start);
 	printf("[right]: ");
-	print_array(source + middle, end - middle);
+	print_array(source + md, end - md);
 	i = start;
-	j = middle;
+	j = md;
 	for (k = start; k < end; k++)
 	{
-		if (i < middle && (j >= end || source[i] <= source[j]))
+		if (i < md && (j >= end || source[i] <= source[j]))
 		{
-			dest[k] = source[i];
+			desti[k] = source[i];
 			i++;
 		}
 		else
 		{
-			dest[k] = source[j];
+			desti[k] = source[j];
 			j++;
 		}
 	}
 	printf("[Done]: ");
-	print_array(dest + start, end - start);
+	print_array(desti + start, end - start);
 }
 
 /**
-* TDSplitMerge - recursively splits the array, merge and sort
-* @start: starting index (inclusive)
-* @end: end index (exclusive)
-* @array: the array to sort
-* @clone: a clone of the array
+* Split_The_Merge - recursively splits the array, merge and sort
+* @start: starting the index
+* @end: end index
+* @array: the array to be sorted
+* @clone: clone array
 */
-void TDSplitMerge(size_t start, size_t end, int *array, int *clone)
+void Split_The_Merge(size_t start, size_t end, int *array, int *clone)
 {
-	size_t middle;
+	size_t md;
 
 	if (end - start < 2)
 		return;
-	middle = (start + end) / 2;
-	TDSplitMerge(start, middle, array, clone);
-	TDSplitMerge(middle, end, array, clone);
-	TDMerge(start, middle, end, array, clone);
-	for (middle = start; middle < end; middle++)
-		clone[middle] = array[middle];
+	md = (start + end) / 2;
+	Split_The_Merge(start, md, array, clone);
+	Split_The_Merge(md, end, array, clone);
+	merge(start, md, end, array, clone);
+	for (md = start; md < end; md++)
+		clone[md] = array[md];
 }
 
 /**
-* merge_sort - sorts an array of integers
-* Merge sort algorithm
-* @array: array to sort
-* @size: size of the array
+* merge_sort - sorts array of integers
+* Merge sorting algorithm
+* @array: array to be sorted
+* @size: size of array
 *
 * Return: void
 */
@@ -81,6 +81,6 @@ void merge_sort(int *array, size_t size)
 		return;
 	for (i = 0; i < size; i++)
 		clone[i] = array[i];
-	TDSplitMerge(0, size, array, clone);
+	Split_The_Merge(0, size, array, clone);
 	free(clone);
 }
