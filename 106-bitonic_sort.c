@@ -47,7 +47,7 @@ void merge_bitonic(char up, int *array, size_t size)
  * @size: Size of the sub-array.
  * @ts: Total size of the original array.
  */
-void rec_bitonic(char up, int *array, size_t size, size_t ts)
+void rec_bitonic_sort(char up, int *array, size_t size, size_t ts)
 {
 	if (size < 2)
 		return;
@@ -55,8 +55,8 @@ void rec_bitonic(char up, int *array, size_t size, size_t ts)
 	printf("Merging [%lu/%lu] (%s):\n", size, ts, (up == 1) ? "UP" : "DOWN");
 	print_array(array, size);
 
-	rec_bitonic(1, array, size / 2, ts);
-	rec_bitonic(0, array + (size / 2), size / 2, ts);
+	rec_bitonic_sort(1, array, size / 2, ts);
+	rec_bitonic_sort(0, array + (size / 2), size / 2, ts);
 
 	merge_bitonic(up, array, size);
 
@@ -65,15 +65,15 @@ void rec_bitonic(char up, int *array, size_t size, size_t ts)
 }
 
 /**
- * bitonic_sort - Sort an array.
- * @array: Array sort.
- * @size: Size of array.
+ * bitonic_sort - Sort an array
+ * @array: Array to sort.
+ * @size: Size of the array.
  */
 void bitonic_sort(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
 		return;
 
-	rec_bitonic(1, array, size, size);
+	rec_bitonic_sort(1, array, size, size);
 }
 
