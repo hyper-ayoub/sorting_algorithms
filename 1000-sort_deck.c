@@ -4,7 +4,7 @@
 #include <string.h>
 
 /**
-* get_card - Gets the relative value
+* get_card - Gets the relative value of a card from its string representation
 * @str: Value of the card
 *
 * Return: Relative value of the card (0 through 12)
@@ -26,13 +26,13 @@ int get_card(const char *str)
 }
 
 /**
-* swap_node - Swaps a node within a doubly linked list
+* swap_deck_node - Swaps a node within a doubly linked list
 * @list: Double pointer to the list
 * @node: Node to be swapped
 *
 * Return: void
 */
-void swap_node(deck_node_t **list, deck_node_t *node)
+void swap_deck_node(deck_node_t **list, deck_node_t *node)
 {
 	node->next->prev = node->prev;
 	if (node->prev)
@@ -54,7 +54,7 @@ void swap_node(deck_node_t **list, deck_node_t *node)
 */
 void sort_deck(deck_node_t **deck)
 {
-	char swapped = 1, ca1, ca2;
+	char swapped = 1, c1, c2;
 	deck_node_t *current;
 
 	if (deck == NULL || *deck == NULL || (*deck)->next == NULL)
@@ -65,11 +65,11 @@ void sort_deck(deck_node_t **deck)
 		swapped = 0;
 		while (current->next != NULL)
 		{
-			ca1 = get_card(current->card->value) + 13 * current->card->kind;
-			ca2 = get_card(current->next->card->value) + 13 * current->next->card->kind;
-			if (ca1 > ca2)
+			c1 = get_card(current->card->value) + 13 * current->card->kind;
+			c2 = get_card(current->next->card->value) + 13 * current->next->card->kind;
+			if (c1 > c2)
 			{
-				swap_node(deck, current);
+				swap_deck_node(deck, current);
 				swapped = 1;
 			}
 			else
@@ -80,11 +80,11 @@ void sort_deck(deck_node_t **deck)
 		swapped = 0;
 		while (current->prev != NULL)
 		{
-			ca1 = get_card(current->card->value) + 13 * current->card->kind;
-			ca2 = get_card(current->prev->card->value) + 13 * current->prev->card->kind;
-			if (ca1 < ca2)
+			c1 = get_card(current->card->value) + 13 * current->card->kind;
+			c2 = get_card(current->prev->card->value) + 13 * current->prev->card->kind;
+			if (c1 < c2)
 			{
-				swap_node(deck, current->prev);
+				swap_deck_node(deck, current->prev);
 				swapped = 1;
 			}
 			else
