@@ -1,13 +1,13 @@
 #include "sort.h"
 
 /**
- * adjust_heap - Adjusts the heap structure starting from a given root.
+ * adjust - Adjusts the heap.
  * @array: The array representing the heap.
  * @root: The root index of the heap.
  * @end: The last index of the heap.
  * @size: The size of the array.
  */
-void adjust_heap(int *array, size_t root, size_t end, size_t size)
+void adjust(int *array, size_t root, size_t end, size_t size)
 {
 	size_t left, right, swap;
 	int temp;
@@ -31,28 +31,28 @@ void adjust_heap(int *array, size_t root, size_t end, size_t size)
 }
 
 /**
- * build_heap - Builds a heap from an unsorted array.
+ * build - Builds a heap
  * @array: The array to be turned into a heap.
  * @size: The size of the array.
  *
  * Return: void
  */
-void build_heap(int *array, size_t size)
+void build(int *array, size_t size)
 {
 	size_t parent;
 
 	for (parent = ((size - 1) - 1) / 2; 1; parent--)
 	{
-		adjust_heap(array, parent, size - 1, size);
+		adjust(array, parent, size - 1, size);
 		if (parent == 0)
 			break;
 	}
 }
 
 /**
- * heap_sort - Sorts an array of ints in ascending order using the Heap sort algorithm.
- * @array: The array to be sorted.
- * @size: The size of the array.
+ * heap_sort - Sorts an array of ints
+ * @array: The array to be sorted
+ * @size: The size of the array
  *
  * Return: void
  */
@@ -63,7 +63,7 @@ void heap_sort(int *array, size_t size)
 
 	if (array == NULL || size < 2)
 		return;
-	build_heap(array, size);
+	build(array, size);
 	end = size - 1;
 	while (end > 0)
 	{
@@ -72,7 +72,7 @@ void heap_sort(int *array, size_t size)
 		array[0] = temp;
 		print_array(array, size);
 		end--;
-		adjust_heap(array, 0, end, size);
+		adjust(array, 0, end, size);
 	}
 }
 
